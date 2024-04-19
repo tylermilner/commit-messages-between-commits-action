@@ -1,0 +1,41 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test-action:
+    name: GitHub Actions Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Test Local Action
+        id: test-action
+        uses: ./
+        with:
+          begin-sha: ${{ github.event.before }}
+          end-sha: ${{ github.sha }}
+          release-notes-file: release-notes.txt
+
+      - name: Print Variable Output
+        id: variable-output
+        run: |
+          echo "Generated release notes output: ${{ steps.test-action.outputs.release-notes }}"
+
+      - name: Print File Output
+        id: file-output
+        run: |
+          echo "Contents of release notes file:"
+          cat release-notes.txt
