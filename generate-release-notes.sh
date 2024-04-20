@@ -19,7 +19,7 @@ fi
 
 # Get the commit history between begin and end SHAs
 echo "Generating release notes between $INITIAL_SHA and $INPUT_END_SHA..."
-RELEASE_NOTES=$(git log --oneline --no-decorate $INITIAL_SHA..$INPUT_END_SHA)
+RELEASE_NOTES=$(git log --oneline --no-decorate "$INITIAL_SHA".."$INPUT_END_SHA")
 
 # Remove the commit hash at the beginning of each line
 RELEASE_NOTES=$(echo "$RELEASE_NOTES" | cut -d ' ' -f2-)
