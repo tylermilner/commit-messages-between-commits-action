@@ -5,7 +5,7 @@
 # Validate environment variable inputs
 if [[ -z "$INPUT_END_SHA" ]]; then
     # In theory, this should never happen since `action.yml` sets the default value of `end-sha` to the current commit
-    echo 'Error: Unable to generate release notes. Missing `end-sha` input.'
+    echo "Error: Unable to generate release notes. Missing 'end-sha' input."
     exit 1
 fi
 
@@ -13,7 +13,7 @@ fi
 INITIAL_SHA="$INPUT_BEGIN_SHA"
 
 if [[ -z "$INPUT_BEGIN_SHA" ]]; then
-    echo 'Missing `begin-sha` input. Defaulting to initial commit.'
+    echo "Missing 'begin-sha' input. Defaulting to initial commit."
     INITIAL_SHA=$(git rev-list --max-parents=0 HEAD)
 fi
 
