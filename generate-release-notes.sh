@@ -25,7 +25,7 @@ RELEASE_NOTES=$(git log --oneline --no-decorate "$INITIAL_SHA".."$INPUT_END_SHA"
 RELEASE_NOTES=$(echo "$RELEASE_NOTES" | cut -d ' ' -f2-)
 
 # Add a dash at the beginning of each line
-RELEASE_NOTES="${RELEASE_NOTES//$'\n'/$'\n'- }"
+RELEASE_NOTES="- ${RELEASE_NOTES//$'\n'/$'\n'- }"
 
 echo "Generated release notes:"
 echo "$RELEASE_NOTES"
@@ -40,6 +40,8 @@ fi
 # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
 echo "Saving to GitHub output..."
 delimiter="$(openssl rand -hex 8)"
-echo "release-notes<<${delimiter}" >> "${GITHUB_OUTPUT}"
-echo "$RELEASE_NOTES" >> "${GITHUB_OUTPUT}"
-echo "${delimiter}" >> "${GITHUB_OUTPUT}"
+{
+    echo "release-notes<<${delimiter}"
+    echo "$RELEASE_NOTES"
+    echo "${delimiter}"
+} >> "${GITHUB_OUTPUT}"
