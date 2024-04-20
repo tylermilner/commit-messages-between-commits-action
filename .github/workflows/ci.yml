@@ -34,7 +34,10 @@ jobs:
       - name: Print Variable Output
         id: variable-output
         run: |
-          echo "Generated release notes output: ${{ steps.test-action.outputs.release-notes }}"
+          echo "Generated release notes output:
+          cat << EOF
+          ${{ steps.test-action.outputs.release-notes }}"
+          EOF
 
       - name: Print File Output
         id: file-output
