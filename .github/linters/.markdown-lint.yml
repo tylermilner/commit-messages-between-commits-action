@@ -4,6 +4,7 @@ MD004:
 
 MD013:
   code_blocks: false
+  line_length: 160
 
 # Ordered list item prefix
 MD029:
