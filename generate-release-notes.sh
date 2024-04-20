@@ -25,7 +25,7 @@ RELEASE_NOTES=$(git log --oneline --no-decorate "$INITIAL_SHA".."$INPUT_END_SHA"
 RELEASE_NOTES=$(echo "$RELEASE_NOTES" | cut -d ' ' -f2-)
 
 # Add a dash at the beginning of each line
-RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed 's/^/- /')
+RELEASE_NOTES="${RELEASE_NOTES//$'\n'/$'\n'- }"
 
 echo "Generated release notes:"
 echo "$RELEASE_NOTES"
