@@ -19,12 +19,13 @@ by its terms.
 
 The following files make up this action:
 
-* `action.yaml` - action metadata
-* `generate-release-notes.sh` - main action logic. Changes to the action's functionality should be made here.
+- `action.yaml` - action metadata
+- `generate-release-notes.sh` - main action logic. Changes to the action's functionality should be made here.
 
 ## Making Code Changes
 
-Since this is a composite action, modifying it is as simple as opening `generate-release-notes.sh` and making the necessary changes. Don't forget to update the action's metadata in `action.yaml` if necessary.
+Since this is a composite action, modifying it is as simple as opening `generate-release-notes.sh` and making the necessary changes.
+Don't forget to update the action's metadata in `action.yaml` if necessary.
 
 ## Submitting a pull request
 

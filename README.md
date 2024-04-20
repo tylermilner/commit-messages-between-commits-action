@@ -16,8 +16,8 @@ A GitHub Action to generate the list of commit messages between two commits.
 
 ### `release-notes-file`
 
-**Optional** Path to the file to save the release notes to, including file extension. Instead of using the `release-notes` output, 
-this option can be useful if there is a need to preserve the contents of the commit message _exactly_, so that single quotes `'` 
+**Optional** Path to the file to save the release notes to, including file extension. Instead of using the `release-notes` output,
+this option can be useful if there is a need to preserve the contents of the commit message _exactly_, so that single quotes `'`
 and double quotes `"` are not evaluated or removed from the output when expanded by the GitHub Actions `${{ }}` variable syntax.
 
 ## Outputs
