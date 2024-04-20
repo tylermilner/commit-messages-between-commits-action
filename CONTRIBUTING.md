@@ -20,12 +20,29 @@ by its terms.
 The following files make up this action:
 
 - `action.yaml` - action metadata
-- `generate-release-notes.sh` - main action logic. Changes to the action's functionality should be made here.
+- `generate-release-notes.sh` - main action logic. Changes to the action's
+functionality should be made here.
 
 ## Making Code Changes
 
-Since this is a composite action, modifying it is as simple as opening `generate-release-notes.sh` and making the necessary changes.
+Since this is a composite action, modifying it is as simple as opening
+`generate-release-notes.sh` and making the necessary changes.
 Don't forget to update the action's metadata in `action.yaml` if necessary.
+
+## Linting
+
+Several linters are setup in the CI pipeline. If you want to lint locally,
+install the following tools:
+
+- [markdownlint](https://github.com/DavidAnson/markdownlint) or
+[markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) if using
+]Homebrew](<https://brew.sh>) on macOS.
+
+Run the following command to run the linters locally:
+
+```Shell
+./lint.sh
+```
 
 ## Submitting a pull request
 
