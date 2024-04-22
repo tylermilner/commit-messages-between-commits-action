@@ -7,6 +7,8 @@ describe('generate-release-notes.sh', () => {
   let projectDir;
   let repoDir;
 
+  // - Test Setup
+
   beforeEach(() => {
     // Store the original working directory
     projectDir = process.cwd();
@@ -35,8 +37,9 @@ describe('generate-release-notes.sh', () => {
     process.env.GITHUB_OUTPUT = path.join(repoDir, 'output.txt');
   });
 
-  it('outputs release notes to GITHUB_OUTPUT', () => {
-    // Act
+  // - Test Helpers
+
+  function runScript() {
     try {
         execSync('./generate-release-notes.sh', { 
             encoding: 'utf8', 
@@ -48,9 +51,16 @@ describe('generate-release-notes.sh', () => {
         console.error('Stdout:', error.stdout);
         console.error('Stderr:', error.stderr);
 
-        // Fail the test
+        // Fail the test if errors occurred
         expect(error).toBeUndefined();
     }
+  }
+
+  // - Tests
+
+  it('outputs release notes to GITHUB_OUTPUT', () => {
+    // Act
+    runScript();
 
     // Assert
     const output = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
@@ -63,26 +73,15 @@ describe('generate-release-notes.sh', () => {
     process.env.RELEASE_NOTES_FILE = path.join(repoDir, 'release-notes.txt');
 
     // Act
-    try {
-        execSync('./generate-release-notes.sh', { 
-            encoding: 'utf8', 
-            env: process.env 
-        });
-    } catch (error) {
-        // Log the error and the output for easier debugging
-        console.error('Error executing script:', error);
-        console.error('Stdout:', error.stdout);
-        console.error('Stderr:', error.stderr);
-
-        // Fail the test
-        expect(error).toBeUndefined();
-    }
+    runScript();
 
     // Assert
     const output = fs.readFileSync('release-notes.txt', 'utf8');
     const expectedOutputRegex = /- Third commit\n- Second commit/;
     expect(output).toMatch(expectedOutputRegex);
   });
+
+  // - Test Cleanup
 
   afterEach(() => {
     // Clean up the temporary directory
