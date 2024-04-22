@@ -4,9 +4,13 @@ const os = require('os');
 const path = require('path');
 
 describe('generate-release-notes.sh', () => {
+  let projectDir;
   let repoDir;
 
   beforeEach(() => {
+    // Store the original working directory
+    projectDir = process.cwd();
+
     // Create a new temporary directory and copy the script into it
     repoDir = fs.mkdtempSync(path.join(os.tmpdir(), 'jest-'));
     execSync('cp generate-release-notes.sh ' + repoDir);
@@ -26,13 +30,13 @@ describe('generate-release-notes.sh', () => {
     execSync('git commit -am "Third commit"');
   });
 
-  it('generates the expected release notes', () => {
+  it('outputs release notes to GITHUB_OUTPUT', () => {
     // Arrange
     // Set the environment variables that the script expects
     process.env.INPUT_BEGIN_SHA = 'HEAD~2'; // Two commits back
     process.env.INPUT_END_SHA = 'HEAD';
     process.env.GITHUB_OUTPUT = path.join(repoDir, 'output.txt');
-    
+
     // Act
     try {
         execSync('./generate-release-notes.sh', { 
@@ -55,6 +59,36 @@ describe('generate-release-notes.sh', () => {
     expect(output).toMatch(expectedOutputRegex);
   });
 
+  it('outputs release notes to file', () => {
+    // Arrange
+    // Set the environment variables that the script expects
+    process.env.INPUT_BEGIN_SHA = 'HEAD~2'; // Two commits back
+    process.env.INPUT_END_SHA = 'HEAD';
+    process.env.GITHUB_OUTPUT = path.join(repoDir, 'output.txt');
+    process.env.RELEASE_NOTES_FILE = path.join(repoDir, 'release-notes.txt');
+
+    // Act
+    try {
+        execSync('./generate-release-notes.sh', { 
+            encoding: 'utf8', 
+            env: process.env 
+        });
+    } catch (error) {
+        // Log the error and the output for easier debugging
+        console.error('Error executing script:', error);
+        console.error('Stdout:', error.stdout);
+        console.error('Stderr:', error.stderr);
+
+        // Fail the test
+        expect(error).toBeUndefined();
+    }
+
+    // Assert
+    const output = fs.readFileSync('release-notes.txt', 'utf8');
+    const expectedOutputRegex = /- Third commit\n- Second commit/;
+    expect(output).toMatch(expectedOutputRegex);
+  });
+
   afterEach(() => {
     // Clean up the temporary directory
     process.chdir(os.tmpdir());
@@ -63,5 +97,8 @@ describe('generate-release-notes.sh', () => {
             console.error("Error removing temporary directory: " + err);
         }
     });
+
+    // Reset the working directory back to the original one after each test
+    process.chdir(projectDir);
   });
 });
