@@ -28,15 +28,14 @@ describe('generate-release-notes.sh', () => {
     execSync('git commit -am "Second commit"');
     execSync('echo "Third commit" > file.txt');
     execSync('git commit -am "Third commit"');
-  });
 
-  it('outputs release notes to GITHUB_OUTPUT', () => {
-    // Arrange
     // Set the environment variables that the script expects
     process.env.INPUT_BEGIN_SHA = 'HEAD~2'; // Two commits back
     process.env.INPUT_END_SHA = 'HEAD';
     process.env.GITHUB_OUTPUT = path.join(repoDir, 'output.txt');
+  });
 
+  it('outputs release notes to GITHUB_OUTPUT', () => {
     // Act
     try {
         execSync('./generate-release-notes.sh', { 
@@ -61,10 +60,6 @@ describe('generate-release-notes.sh', () => {
 
   it('outputs release notes to file', () => {
     // Arrange
-    // Set the environment variables that the script expects
-    process.env.INPUT_BEGIN_SHA = 'HEAD~2'; // Two commits back
-    process.env.INPUT_END_SHA = 'HEAD';
-    process.env.GITHUB_OUTPUT = path.join(repoDir, 'output.txt');
     process.env.RELEASE_NOTES_FILE = path.join(repoDir, 'release-notes.txt');
 
     // Act
