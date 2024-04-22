@@ -22,12 +22,59 @@ The following files make up this action:
 - `action.yaml` - action metadata
 - `generate-release-notes.sh` - main action logic. Changes to the action's
 functionality should be made here.
+- `package.json` / `package-lock.json` - defines the development JavaScript dependencies
+  that are used for testing this action.
+- `__tests__` - contains the unit tests for the action.
 
 ## Making Code Changes
 
-Since this is a composite action, modifying it is as simple as opening
-`generate-release-notes.sh` and making the necessary changes.
-Don't forget to update the action's metadata in `action.yaml` if necessary.
+### Development Environment Setup
+
+Although this is a composite action, we do make use of JavaScript for unit 
+testing. As such, you will need to have [Node.js](https://nodejs.org/en) 
+installed on your system, ideally through a version manager like [nvm](https://github.com/nvm-sh/nvm).
+
+Once Node is installed, `cd` into the action folder and install the project dependencies via
+[npm](https://www.npmjs.com):
+
+```Shell
+cd commit-messages-between-commits-action
+npm install
+```
+
+This will install the only development dependency, which is Jest.
+
+### Making Code Changes
+
+Since this is a composite action, all logic is contained within the 
+`generate-release-notes.sh` script. Make changes to this file to update the 
+action's functionality.
+
+If you want to run the action locally to test things out, make sure you have 
+the necessary environment variables set:
+
+```Shell
+export INPUT_BEGIN_SHA=begin_sha_here
+export INPUT_END_SHA=end_sha_here
+export RELEASE_NOTES_FILE=release-notes.txt
+```
+
+Then run the action by executing the script:
+
+```Shell
+./generate-release-notes.sh
+```
+
+Once satisfied, don't forget to update the action's metadata in `action.yaml` 
+if necessary.
+
+### Running Tests
+
+This action uses [jest](https://jestjs.io/) for testing. Run tests using:
+
+```Shell
+npm test
+```
 
 ## Linting
 

@@ -1,0 +1,12 @@
+{
+    "name": "commit-messages-between-commits-action",
+    "version": "1.0.0",
+    "description": "A GitHub Action to get commit messages between two commits",
+    "private": true,
+    "scripts": {
+      "test": "jest"
+    },
+    "devDependencies": {
+      "jest": "^29.7.0"
+    }
+  }
