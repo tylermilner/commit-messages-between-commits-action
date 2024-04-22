@@ -27,11 +27,13 @@ describe('generate-release-notes.sh', () => {
   });
 
   it('generates the expected release notes', () => {
-    // Run the GitHub Action script
+    // Arrange
+    // Set the environment variables that the script expects
     process.env.INPUT_BEGIN_SHA = 'HEAD~2'; // Two commits back
     process.env.INPUT_END_SHA = 'HEAD';
     process.env.GITHUB_OUTPUT = path.join(repoDir, 'output.txt');
     
+    // Act
     try {
         execSync('./generate-release-notes.sh', { 
             encoding: 'utf8', 
@@ -47,12 +49,10 @@ describe('generate-release-notes.sh', () => {
         expect(error).toBeUndefined();
     }
 
-    // Verify the output
+    // Assert
     const output = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
-    
-    // Use regex to verify the output
-    const regex = /release-notes<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/;
-    expect(output).toMatch(regex);
+    const expectedOutputRegex = /release-notes<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/;
+    expect(output).toMatch(expectedOutputRegex);
   });
 
   afterEach(() => {
