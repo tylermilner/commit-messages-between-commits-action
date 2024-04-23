@@ -39,21 +39,34 @@ describe('generate-release-notes.sh', () => {
 
     // - Test Helpers
 
-    function runScript() {
+    function runScript(expectFailure = false) {
+        let stdout = '';
+        let stderr = '';
+
         try {
-            execSync('./generate-release-notes.sh', {
+            const result = execSync('./generate-release-notes.sh', {
                 encoding: 'utf8',
                 env: process.env
             });
-        } catch (error) {
-            // Log the error and the output for easier debugging
-            console.error('Error executing script:', error);
-            console.error('Stdout:', error.stdout);
-            console.error('Stderr:', error.stderr);
 
-            // Fail the test if errors occurred
-            expect(error).toBeUndefined();
+            stdout = result.stdout;
+            stderr = result.stderr;
+        } catch (error) {
+            stdout = error.stdout;
+            stderr = error.stderr;
+
+            if (!expectFailure) {
+                // Log the unexpected error to help with debugging
+                console.error('Error executing script:', error);
+                console.error('Stdout:', error.stdout);
+                console.error('Stderr:', error.stderr);
+
+                // Re-throw the error to trigger a test failure
+                throw error;
+            }
         }
+
+        return { stdout, stderr };
     }
 
     // - Tests
@@ -79,6 +92,31 @@ describe('generate-release-notes.sh', () => {
         const output = fs.readFileSync('release-notes.txt', 'utf8');
         const expectedOutputRegex = /- Third commit\n- Second commit/;
         expect(output).toMatch(expectedOutputRegex);
+    });
+
+    it('uses initial commit if INPUT_BEGIN_SHA is not set', () => {
+        // Arrange
+        delete process.env.INPUT_BEGIN_SHA;
+
+        // Act
+        runScript();
+
+        // Assert
+        const output = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        const expectedOutputRegex = /release-notes<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/;
+        expect(output).toMatch(expectedOutputRegex);
+    });
+
+    it('fails if INPUT_END_SHA is not set', () => {
+        // Arrange
+        delete process.env.INPUT_END_SHA;
+
+        // Act
+        const result = runScript(true);
+
+        // Assert
+        const stdout = result.stdout;
+        expect(stdout).toContain("Error: Unable to generate release notes. Missing 'end-sha' input.");
     });
 
     // - Test Cleanup
