@@ -1,6 +1,7 @@
 # Commit Messages Between Commits Action
 
-- [ ] TODO: Add badges
+[![GitHub Super-Linter](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/linter.yml/badge.svg)](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/linter.yml)
+[![CI](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/ci.yml/badge.svg)](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/ci.yml)
 
 A GitHub Action to generate the list of commit messages between two commits.
 
@@ -8,8 +9,8 @@ A GitHub Action to generate the list of commit messages between two commits.
 
 ### `begin-sha`
 
-**Optional** SHA hash for the commit that should be used as the starting
-commit. Defaults to the initial commit of the repository.
+**Optional** SHA hash for the commit that should be used as the starting commit.
+Defaults to the initial commit of the repository.
 
 ### `end-sha`
 
@@ -19,17 +20,18 @@ Defaults to the current commit (i.e. `${{ github.sha }}`).
 ### `release-notes-file`
 
 **Optional** Path to the file to save the release notes to, including file
-extension. Instead of using the `release-notes` output,
-this option can be useful if there is a need to preserve the contents of the
-commit message _exactly_, so that single quotes `'`
-and double quotes `"` are not evaluated or removed from the output when
-expanded by the GitHub Actions `${{ }}` variable syntax.
+extension. Instead of using the `release-notes` output, this option can be
+useful if there is a need to preserve the contents of the commit message
+_exactly_, so that single quotes `'` and double quotes `"` are not evaluated or
+removed from the output when expanded by the GitHub Actions `${{ }}` variable
+syntax.
 
 ## Outputs
 
 ### `release-notes`
 
-The release notes generated from the commit messages between `begin-sha` and `end-sha`.
+The release notes generated from the commit messages between `begin-sha` and
+`end-sha`.
 
 ## Example usage
 
@@ -47,12 +49,13 @@ steps:
       cat release-notes.txt
 ```
 
-This produces the following output:
-
-- [ ] TODO: Update this output to reflect the actual output of the action
+This produces something like the following output:
 
 ```console
 Contents of release notes file:
+- Message for ending commit here (HEAD/latest commit by default).
+- Message for previous commit here (e.g. HEAD~1).
+- Message for beginning commit here (initial commit by default).
 ```
 
 ## Contributing

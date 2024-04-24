@@ -3,10 +3,14 @@ description: 'Generate list of commit messages between two commits'
 author: 'Tyler Milner'
 inputs:
   begin-sha:
-    description: 'SHA hash for the commit that should be used as the beginning of the commit history. Defaults to initial repo commit.'
+    description:
+      'SHA hash for the commit that should be used as the beginning of the
+      commit history. Defaults to initial repo commit.'
     required: false
   end-sha:
-    description: 'SHA hash for the commit that should be used as the ending of the commit history. Defaults to current commit.'
+    description:
+      'SHA hash for the commit that should be used as the ending of the commit
+      history. Defaults to current commit.'
     required: false
     default: ${{ github.sha }}
   release-notes-file:
@@ -14,7 +18,9 @@ inputs:
     required: false
 outputs:
   release-notes:
-    description: 'The release notes generated from the commit messages between `begin-sha` and `end-sha`'
+    description:
+      'The release notes generated from the commit messages between `begin-sha`
+      and `end-sha`'
     value: ${{ steps.generate-release-notes.outputs.release-notes }}
 runs:
   using: 'composite'
