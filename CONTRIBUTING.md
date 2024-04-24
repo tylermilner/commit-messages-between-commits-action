@@ -47,7 +47,7 @@ npm install
 
 This will install the only development dependency, which is Jest.
 
-### Making Code Changes
+### Updating Functionality
 
 Since this is a composite action, all logic is contained within the
 `generate-release-notes.sh` script. Make changes to this file to update the
