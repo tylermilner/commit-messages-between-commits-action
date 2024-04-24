@@ -20,6 +20,13 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+      
+      # Set Git user for commits that will be created when running tests
+      - name: Setup Git
+        id: setup-git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "<>"
 
       - name: Setup Node.js
         id: setup-node
