@@ -53,8 +53,9 @@ This produces something like the following output:
 
 ```console
 Contents of release notes file:
-- Latest commit message here.
-- Message for commit HEAD~1 here.
+- Message for ending commit here (HEAD/latest commit by default).
+- Message for previous commit here (e.g. HEAD~1).
+- Message for beginning commit here (initial commit by default).
 ```
 
 ## Contributing
