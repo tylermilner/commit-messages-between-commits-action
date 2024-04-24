@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
-      
+
       # Set Git user for commits that will be created when running tests
       - name: Setup Git
         id: setup-git
@@ -39,13 +39,13 @@ jobs:
         id: npm-ci
         run: npm ci
 
-      # - name: Check Format
-      #   id: npm-format-check
-      #   run: npm run format:check
+      - name: Check Format
+        id: npm-format-check
+        run: npm run format:check
 
-      # - name: Lint
-      #   id: npm-lint
-      #   run: npm run lint
+      - name: Lint
+        id: npm-lint
+        run: npm run lint
 
       - name: Test
         id: npm-ci-test
