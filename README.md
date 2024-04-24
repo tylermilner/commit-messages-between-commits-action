@@ -8,8 +8,8 @@ A GitHub Action to generate the list of commit messages between two commits.
 
 ### `begin-sha`
 
-**Optional** SHA hash for the commit that should be used as the starting
-commit. Defaults to the initial commit of the repository.
+**Optional** SHA hash for the commit that should be used as the starting commit.
+Defaults to the initial commit of the repository.
 
 ### `end-sha`
 
@@ -19,17 +19,18 @@ Defaults to the current commit (i.e. `${{ github.sha }}`).
 ### `release-notes-file`
 
 **Optional** Path to the file to save the release notes to, including file
-extension. Instead of using the `release-notes` output,
-this option can be useful if there is a need to preserve the contents of the
-commit message _exactly_, so that single quotes `'`
-and double quotes `"` are not evaluated or removed from the output when
-expanded by the GitHub Actions `${{ }}` variable syntax.
+extension. Instead of using the `release-notes` output, this option can be
+useful if there is a need to preserve the contents of the commit message
+_exactly_, so that single quotes `'` and double quotes `"` are not evaluated or
+removed from the output when expanded by the GitHub Actions `${{ }}` variable
+syntax.
 
 ## Outputs
 
 ### `release-notes`
 
-The release notes generated from the commit messages between `begin-sha` and `end-sha`.
+The release notes generated from the commit messages between `begin-sha` and
+`end-sha`.
 
 ## Example usage
 

@@ -1,7 +1,9 @@
 # Contributing
 
-[fork]: https://github.com/tylermilner/commit-messages-between-commits-action/fork
-[pr]: https://github.com/tylermilner/commit-messages-between-commits-action/compare
+[fork]:
+  https://github.com/tylermilner/commit-messages-between-commits-action/fork
+[pr]:
+  https://github.com/tylermilner/commit-messages-between-commits-action/compare
 [code-of-conduct]: CODE_OF_CONDUCT.md
 
 Hi there! We're thrilled that you'd like to contribute to this project. Your
@@ -21,21 +23,22 @@ The following files make up this action:
 
 - `action.yaml` - action metadata
 - `generate-release-notes.sh` - main action logic. Changes to the action's
-functionality should be made here.
-- `package.json` / `package-lock.json` - defines the development JavaScript dependencies
-  that are used for testing this action.
+  functionality should be made here.
+- `package.json` / `package-lock.json` - defines the development JavaScript
+  dependencies that are used for testing this action.
 - `__tests__` - contains the unit tests for the action.
 
 ## Making Code Changes
 
 ### Development Environment Setup
 
-Although this is a composite action, we do make use of JavaScript for unit 
-testing. As such, you will need to have [Node.js](https://nodejs.org/en) 
-installed on your system, ideally through a version manager like [nvm](https://github.com/nvm-sh/nvm).
+Although this is a composite action, we do make use of JavaScript for unit
+testing. As such, you will need to have [Node.js](https://nodejs.org/en)
+installed on your system, ideally through a version manager like
+[nvm](https://github.com/nvm-sh/nvm).
 
-Once Node is installed, `cd` into the action folder and install the project dependencies via
-[npm](https://www.npmjs.com):
+Once Node is installed, `cd` into the action folder and install the project
+dependencies via [npm](https://www.npmjs.com):
 
 ```Shell
 cd commit-messages-between-commits-action
@@ -46,12 +49,12 @@ This will install the only development dependency, which is Jest.
 
 ### Making Code Changes
 
-Since this is a composite action, all logic is contained within the 
-`generate-release-notes.sh` script. Make changes to this file to update the 
+Since this is a composite action, all logic is contained within the
+`generate-release-notes.sh` script. Make changes to this file to update the
 action's functionality.
 
-If you want to run the action locally to test things out, make sure you have 
-the necessary environment variables set:
+If you want to run the action locally to test things out, make sure you have the
+necessary environment variables set:
 
 ```Shell
 export INPUT_BEGIN_SHA=begin_sha_here
@@ -65,8 +68,8 @@ Then run the action by executing the script:
 ./generate-release-notes.sh
 ```
 
-Once satisfied, don't forget to update the action's metadata in `action.yaml` 
-if necessary.
+Once satisfied, don't forget to update the action's metadata in `action.yaml` if
+necessary.
 
 ### Running Tests
 
@@ -82,8 +85,8 @@ Several linters are setup in the CI pipeline. If you want to lint locally,
 install the following tools:
 
 - [markdownlint](https://github.com/DavidAnson/markdownlint) or
-[markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) if using
-]Homebrew](<https://brew.sh>) on macOS.
+  [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) if using
+  ]Homebrew](<https://brew.sh>) on macOS.
 
 Run the following command to run the linters locally:
 
