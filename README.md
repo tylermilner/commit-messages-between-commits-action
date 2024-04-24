@@ -54,6 +54,7 @@ This produces the following output:
 
 ```console
 Contents of release notes file:
+
 ```
 
 ## Contributing
