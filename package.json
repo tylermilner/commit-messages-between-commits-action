@@ -54,11 +54,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/"
     ],
-    "coverageReporters": [
-      "json-summary",
-      "text",
-      "lcov"
-    ],
+    "coverageReporters": [],
     "collectCoverage": false,
     "collectCoverageFrom": []
   },
