@@ -1,6 +1,7 @@
 # Commit Messages Between Commits Action
 
-- [ ] TODO: Add badges
+[![GitHub Super-Linter](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/linter.yml/badge.svg)](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/linter.yml)
+[![CI](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/ci.yml/badge.svg)](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/ci.yml)
 
 A GitHub Action to generate the list of commit messages between two commits.
 
