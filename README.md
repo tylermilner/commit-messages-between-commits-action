@@ -49,12 +49,12 @@ steps:
       cat release-notes.txt
 ```
 
-This produces the following output:
-
-- [ ] TODO: Update this output to reflect the actual output of the action
+This produces something like the following output:
 
 ```console
 Contents of release notes file:
+- Latest commit message here.
+- Message for commit HEAD~1 here.
 ```
 
 ## Contributing
