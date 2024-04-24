@@ -81,31 +81,31 @@ npm test
 
 ## Linting
 
-Several linters are setup in the CI pipeline. If you want to lint locally,
-install the following tools:
-
-- [markdownlint](https://github.com/DavidAnson/markdownlint) or
-  [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) if using
-  ]Homebrew](<https://brew.sh>) on macOS.
-
-Run the following command to run the linters locally:
+Several linters are setup in the CI pipeline as well as `npm` scripts. Run all
+linters, formatters, and tests at once with:
 
 ```Shell
-./lint.sh
+npm run all
 ```
 
 ## Submitting a pull request
 
 1. [Fork][fork] and clone the repository
-2. Create a new branch: `git checkout -b my-branch-name`
-3. Make your changes
-4. Push to your fork and [submit a pull request][pr]
-5. Pat your self on the back and wait for your pull request to be reviewed and
+2. Configure and install the dependencies: `npm i`
+3. Make sure the tests pass on your machine: `npm test`
+4. Create a new branch: `git checkout -b my-branch-name`
+5. Make your change, add tests, and make sure the tests still pass
+6. Do one final check to ensure all tests, linter, and compilation steps pass:
+   `npm run all`
+7. Push to your fork and [submit a pull request][pr]
+8. Pat your self on the back and wait for your pull request to be reviewed and
    merged.
 
 Here are a few things you can do that will increase the likelihood of your pull
 request being accepted:
 
+- Follow the style guide style by running the linter `npm run lint`.
+- Write tests.
 - Keep your change as focused as possible. If there are multiple changes you
   would like to make that are not dependent upon each other, consider submitting
   them as separate pull requests.
@@ -134,14 +134,17 @@ Perform the following steps to create a manual release:
 
 1. Make sure all desired changes have been pushed to the `main` branch.
 2. Create a `release/*` branch off of `main` (e.g. `release/v1.0.1`).
-3. Create a pull request from the `release/*` branch to `main`.
-4. Once the pull request is merged, create a new release targeted on `main` in
+3. Update the `version` in `package.json` to the desired version.
+4. Run `npm install` to update the `package-lock.json` file.
+5. Run `npm run all` one last time to make sure all tests, linters, etc. pass.
+6. Create a pull request from the `release/*` branch to `main`.
+7. Once the pull request is merged, create a new release targeted on `main` in
    the GitHub UI. Make sure to set it to create the corresponding tag on publish
    (e.g. `v1.0.1`) and keep the "Publish this Action to the GitHub Marketplace"
    option checked.
-5. Once the release has been published on GitHub, switch back to the `main`
+8. Once the release has been published on GitHub, switch back to the `main`
    branch and pull down any changes.
-6. Update the major version tag to point the latest release, which should look
+9. Update the major version tag to point the latest release, which should look
    something like the following (replacing "v1" if publishing a different major
    version tag):
 
@@ -158,3 +161,4 @@ git push origin v1 --force
 - [Creating a composite action](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action)
 - [Action Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
 - [Releasing and maintaining actions](https://docs.github.com/en/actions/creating-actions/releasing-and-maintaining-actions)
+- [`javascript-action` template repository](https://github.com/actions/javascript-action)
