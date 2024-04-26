@@ -3,7 +3,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 
-describe('generate-release-notes.sh', () => {
+describe('generate-commit-messages.sh', () => {
   let projectDir
   let repoDir
 
@@ -15,7 +15,7 @@ describe('generate-release-notes.sh', () => {
 
     // Create a new temporary directory and copy the script into it
     repoDir = fs.mkdtempSync(path.join(os.tmpdir(), 'jest-'))
-    execSync(`cp generate-release-notes.sh ${repoDir}`)
+    execSync(`cp generate-commit-messages.sh ${repoDir}`)
     process.chdir(repoDir)
 
     // Initialize a new Git repository
@@ -44,7 +44,7 @@ describe('generate-release-notes.sh', () => {
     let stderr = ''
 
     try {
-      const result = execSync('./generate-release-notes.sh', {
+      const result = execSync('./generate-commit-messages.sh', {
         encoding: 'utf8',
         env: process.env
       })
@@ -71,26 +71,29 @@ describe('generate-release-notes.sh', () => {
 
   // - Tests
 
-  it('outputs release notes to GITHUB_OUTPUT', () => {
+  it('outputs commit messages to GITHUB_OUTPUT', () => {
     // Act
     runScript()
 
     // Assert
     const output = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8')
     const expectedOutputRegex =
-      /release-notes<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/
+      /commit-messages<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/
     expect(output).toMatch(expectedOutputRegex)
   })
 
-  it('outputs release notes to file', () => {
+  it('outputs commit messages to file', () => {
     // Arrange
-    process.env.RELEASE_NOTES_FILE = path.join(repoDir, 'release-notes.txt')
+    process.env.INPUT_COMMIT_MESSAGES_FILE = path.join(
+      repoDir,
+      'commit-messages.txt'
+    )
 
     // Act
     runScript()
 
     // Assert
-    const output = fs.readFileSync('release-notes.txt', 'utf8')
+    const output = fs.readFileSync('commit-messages.txt', 'utf8')
     const expectedOutputRegex = /- Third commit\n- Second commit/
     expect(output).toMatch(expectedOutputRegex)
   })
@@ -105,7 +108,7 @@ describe('generate-release-notes.sh', () => {
     // Assert
     const output = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8')
     const expectedOutputRegex =
-      /release-notes<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/
+      /commit-messages<<[a-f0-9]+\n- Third commit\n- Second commit\n[a-f0-9]+/
     expect(output).toMatch(expectedOutputRegex)
   })
 
@@ -119,7 +122,7 @@ describe('generate-release-notes.sh', () => {
     // Assert
     const stdout = result.stdout
     expect(stdout).toContain(
-      "Error: Unable to generate release notes. Missing 'end-sha' input."
+      "Error: Unable to generate commit messages. Missing 'end-sha' input."
     )
   })
 

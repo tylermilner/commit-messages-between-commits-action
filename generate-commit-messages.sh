@@ -1,11 +1,11 @@
 #!/bin/bash -l
 
-# TODO: Look into adding ability to trim the release notes (see https://stackoverflow.com/q/66769953/4343618)
+# TODO: Look into adding ability to trim the commit messages (see https://stackoverflow.com/q/66769953/4343618)
 
 # Validate environment variable inputs
 if [[ -z "$INPUT_END_SHA" ]]; then
 	# In theory, this should never happen since `action.yml` sets the default value of `end-sha` to the current commit
-	echo "Error: Unable to generate release notes. Missing 'end-sha' input."
+	echo "Error: Unable to generate commit messages. Missing 'end-sha' input."
 	exit 1
 fi
 
@@ -18,30 +18,30 @@ if [[ -z "$INPUT_BEGIN_SHA" ]]; then
 fi
 
 # Get the commit history between begin and end SHAs
-echo "Generating release notes between $INITIAL_SHA and $INPUT_END_SHA..."
-RELEASE_NOTES=$(git log --oneline --no-decorate "$INITIAL_SHA".."$INPUT_END_SHA")
+echo "Generating commit messages between $INITIAL_SHA and $INPUT_END_SHA..."
+COMMIT_MESSAGES=$(git log --oneline --no-decorate "$INITIAL_SHA".."$INPUT_END_SHA")
 
 # Remove the commit hash at the beginning of each line
-RELEASE_NOTES=$(echo "$RELEASE_NOTES" | cut -d ' ' -f2-)
+COMMIT_MESSAGES=$(echo "$COMMIT_MESSAGES" | cut -d ' ' -f2-)
 
 # Add a dash at the beginning of each line
-RELEASE_NOTES="- ${RELEASE_NOTES//$'\n'/$'\n'- }"
+COMMIT_MESSAGES="- ${COMMIT_MESSAGES//$'\n'/$'\n'- }"
 
-echo "Generated release notes:"
-echo "$RELEASE_NOTES"
+echo "Generated commit messages:"
+echo "$COMMIT_MESSAGES"
 
 # Check if a filename is provided as input
-if [[ -n "$RELEASE_NOTES_FILE" ]]; then
-	# Save the release notes to the specified file
-	echo "$RELEASE_NOTES" >"$RELEASE_NOTES_FILE"
-	echo "Saved release notes to $RELEASE_NOTES_FILE"
+if [[ -n "$INPUT_COMMIT_MESSAGES_FILE" ]]; then
+	# Save the commit messages to the specified file
+	echo "$COMMIT_MESSAGES" >"$INPUT_COMMIT_MESSAGES_FILE"
+	echo "Saved commit messages to $INPUT_COMMIT_MESSAGES_FILE"
 fi
 
 # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
 echo "Saving to GitHub output..."
 delimiter="$(openssl rand -hex 8)"
 {
-	echo "release-notes<<${delimiter}"
-	echo "$RELEASE_NOTES"
+	echo "commit-messages<<${delimiter}"
+	echo "$COMMIT_MESSAGES"
 	echo "${delimiter}"
 } >>"${GITHUB_OUTPUT}"

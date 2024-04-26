@@ -17,10 +17,10 @@ Defaults to the initial commit of the repository.
 **Optional** SHA hash for the commit that should be used as the ending commit.
 Defaults to the current commit (i.e. `${{ github.sha }}`).
 
-### `release-notes-file`
+### `commit-messages-file`
 
-**Optional** Path to the file to save the release notes to, including file
-extension. Instead of using the `release-notes` output, this option can be
+**Optional** Path to the file to save the commit messages to, including file
+extension. Instead of using the `commit-messages` output, this option can be
 useful if there is a need to preserve the contents of the commit message
 _exactly_, so that single quotes `'` and double quotes `"` are not evaluated or
 removed from the output when expanded by the GitHub Actions `${{ }}` variable
@@ -28,34 +28,34 @@ syntax.
 
 ## Outputs
 
-### `release-notes`
+### `commit-messages`
 
-The release notes generated from the commit messages between `begin-sha` and
+The commit messages generated from the commit messages between `begin-sha` and
 `end-sha`.
 
 ## Example usage
 
 ```yaml
 steps:
-  - name: Generate release notes
-    id: release-notes
+  - name: Generate commit messages
+    id: commit-messages
     uses: tylermilner/commit-messages-between-commits-action@v1
     with:
       begin-sha: begin_sha_here
-      release-notes-file: release-notes.txt
-  - name: Use release notes
+      commit-messages-file: commit-messages.txt
+  - name: Use commit messages
     run: |
-      echo "Contents of release notes file:"
-      cat release-notes.txt
+      echo "Commit messages:"
+      cat commit-messages.txt
 ```
 
 This produces something like the following output:
 
 ```console
-Contents of release notes file:
-- Message for ending commit here (HEAD/latest commit by default).
-- Message for previous commit here (e.g. HEAD~1).
-- Message for beginning commit here (initial commit by default).
+Contents of commit messages file:
+- Here is the commit message for the ending commit, which is the latest commit (i.e. `HEAD`) by default.
+- Here is the commit message for the previous commit (e.g. `HEAD~1`).
+- Here is the commit message for the beginning commit, which is the initial commit by default.
 ```
 
 ## Contributing
