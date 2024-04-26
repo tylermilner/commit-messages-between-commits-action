@@ -60,7 +60,9 @@ steps:
       cat commit-messages.txt
 ```
 
-For the output, each commit message is prefixed with a `- ` and separated by a
+<!-- markdownlint-disable-next-line MD038 -->
+
+For the output, each commit message is prefixed with a `-` and separated by a
 newline.
 
 An example output might look something like:
