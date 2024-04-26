@@ -30,7 +30,7 @@ runs:
       env:
         INPUT_BEGIN_SHA: ${{ inputs.begin-sha }}
         INPUT_END_SHA: ${{ inputs.end-sha }}
-        COMMIT_MESSAGES_FILE: ${{ inputs.commit-messages-file }}
+        INPUT_COMMIT_MESSAGES_FILE: ${{ inputs.commit-messages-file }}
 branding:
   icon: 'git-commit'
   color: 'green'

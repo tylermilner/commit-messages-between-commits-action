@@ -84,7 +84,10 @@ describe('generate-commit-messages.sh', () => {
 
   it('outputs commit messages to file', () => {
     // Arrange
-    process.env.COMMIT_MESSAGES_FILE = path.join(repoDir, 'commit-messages.txt')
+    process.env.INPUT_COMMIT_MESSAGES_FILE = path.join(
+      repoDir,
+      'commit-messages.txt'
+    )
 
     // Act
     runScript()

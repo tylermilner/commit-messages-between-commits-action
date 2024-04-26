@@ -31,10 +31,10 @@ echo "Generated commit messages:"
 echo "$COMMIT_MESSAGES"
 
 # Check if a filename is provided as input
-if [[ -n "$COMMIT_MESSAGES_FILE" ]]; then
+if [[ -n "$INPUT_COMMIT_MESSAGES_FILE" ]]; then
 	# Save the commit messages to the specified file
-	echo "$COMMIT_MESSAGES" >"$COMMIT_MESSAGES_FILE"
-	echo "Saved commit messages to $COMMIT_MESSAGES_FILE"
+	echo "$COMMIT_MESSAGES" >"$INPUT_COMMIT_MESSAGES_FILE"
+	echo "Saved commit messages to $INPUT_COMMIT_MESSAGES_FILE"
 fi
 
 # Output multiline string. See https://github.com/orgs/community/discussions/26288#discussioncomment-3876281

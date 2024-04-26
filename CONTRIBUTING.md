@@ -59,7 +59,7 @@ necessary environment variables set:
 ```Shell
 export INPUT_BEGIN_SHA=begin_sha_here
 export INPUT_END_SHA=end_sha_here
-export COMMIT_MESSAGES_FILE=commit-messages.txt
+export INPUT_COMMIT_MESSAGES_FILE=commit-messages.txt
 ```
 
 Then run the action by executing the script:
