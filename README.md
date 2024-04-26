@@ -53,9 +53,9 @@ This produces something like the following output:
 
 ```console
 Contents of commit messages file:
-- Message for ending commit here (HEAD/latest commit by default).
-- Message for previous commit here (e.g. HEAD~1).
-- Message for beginning commit here (initial commit by default).
+- Here is the commit message for the ending commit, which is the latest commit (i.e. `HEAD`) by default.
+- Here is the commit message for the previous commit (e.g. `HEAD~1`).
+- Here is the commit message for the beginning commit, which is the initial commit by default.
 ```
 
 ## Contributing
