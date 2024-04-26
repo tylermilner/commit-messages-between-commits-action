@@ -3,7 +3,18 @@
 [![GitHub Super-Linter](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/linter.yml/badge.svg)](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/linter.yml)
 [![CI](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/ci.yml/badge.svg)](https://github.com/tylermilner/commit-messages-between-commits-action/actions/workflows/ci.yml)
 
-A GitHub Action to generate the list of commit messages between two commits.
+A GitHub Action to generate the list of commit messages between two commits. For
+instance, this can be used to generate very basic changelogs or release notes
+between builds.
+
+## Why?
+
+My aim with this is to replicate what I'm used to with one of my previous
+[Jenkins](https://www.jenkins.io) setups, where the entire list of commits since
+the last build was easily visible, and served as a very crude changelog that QA
+could use to help validate builds. If you're looking for something fancy to
+intelligently parse commit messages and generate release notes, then look
+elsewhere!
 
 ## Inputs
 
@@ -49,7 +60,10 @@ steps:
       cat commit-messages.txt
 ```
 
-This produces something like the following output:
+For the output, each commit message is prefixed with a `- ` and separated by a
+newline.
+
+An example output might look something like:
 
 ```console
 Contents of commit messages file:
