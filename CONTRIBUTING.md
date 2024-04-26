@@ -22,7 +22,7 @@ by its terms.
 The following files make up this action:
 
 - `action.yaml` - action metadata
-- `generate-release-notes.sh` - main action logic. Changes to the action's
+- `generate-commit-messages.sh` - main action logic. Changes to the action's
   functionality should be made here.
 - `package.json` / `package-lock.json` - defines the development JavaScript
   dependencies that are used for testing this action.
@@ -50,7 +50,7 @@ This will install the only development dependency, which is Jest.
 ### Updating Functionality
 
 Since this is a composite action, all logic is contained within the
-`generate-release-notes.sh` script. Make changes to this file to update the
+`generate-commit-messages.sh` script. Make changes to this file to update the
 action's functionality.
 
 If you want to run the action locally to test things out, make sure you have the
@@ -59,13 +59,13 @@ necessary environment variables set:
 ```Shell
 export INPUT_BEGIN_SHA=begin_sha_here
 export INPUT_END_SHA=end_sha_here
-export RELEASE_NOTES_FILE=release-notes.txt
+export COMMIT_MESSAGES_FILE=commit-messages.txt
 ```
 
 Then run the action by executing the script:
 
 ```Shell
-./generate-release-notes.sh
+./generate-commit-messages.sh
 ```
 
 Once satisfied, don't forget to update the action's metadata in `action.yaml` if

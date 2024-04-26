@@ -13,26 +13,24 @@ inputs:
       history. Defaults to current commit.'
     required: false
     default: ${{ github.sha }}
-  release-notes-file:
+  commit-messages-file:
     description: 'File path to save commit messages to.'
     required: false
 outputs:
-  release-notes:
-    description:
-      'The release notes generated from the commit messages between `begin-sha`
-      and `end-sha`'
-    value: ${{ steps.generate-release-notes.outputs.release-notes }}
+  commit-messages:
+    description: 'The commit messages between `begin-sha` and `end-sha`'
+    value: ${{ steps.generate-commit-messages.outputs.commit-messages }}
 runs:
   using: 'composite'
   steps:
-    - name: Generate release notes
-      id: generate-release-notes
-      run: ${{ github.action_path }}/generate-release-notes.sh
+    - name: Generate commit messages
+      id: generate-commit-messages
+      run: ${{ github.action_path }}/generate-commit-messages.sh
       shell: bash
       env:
         INPUT_BEGIN_SHA: ${{ inputs.begin-sha }}
         INPUT_END_SHA: ${{ inputs.end-sha }}
-        RELEASE_NOTES_FILE: ${{ inputs.release-notes-file }} # TODO: Rename to INPUT_RELEASE_NOTES_FILE
+        COMMIT_MESSAGES_FILE: ${{ inputs.commit-messages-file }}
 branding:
   icon: 'git-commit'
   color: 'green'

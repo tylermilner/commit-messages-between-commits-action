@@ -68,18 +68,18 @@ jobs:
         with:
           begin-sha: ${{ github.event.before }}
           end-sha: ${{ github.sha }}
-          release-notes-file: release-notes.txt
+          commit-messages-file: commit-messages.txt
 
       - name: Print Variable Output
         id: variable-output
         run: |
-          echo "Generated release notes output:"
+          echo "Generated commit messages output:"
           cat << EOF
-          ${{ steps.test-action.outputs.release-notes }}
+          ${{ steps.test-action.outputs.commit-messages }}
           EOF
 
       - name: Print File Output
         id: file-output
         run: |
-          echo "Contents of release notes file:"
-          cat release-notes.txt
+          echo "Contents of commit messages file:"
+          cat commit-messages.txt
