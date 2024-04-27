@@ -10,8 +10,16 @@ and this project adheres to
 
 TBD
 
+## [1.0.0] - 2024-04-26
+
+### Added
+
+- Initial release.
+
 [unreleased]:
   https://github.com/tylermilner/commit-messages-between-commits-action/compare/v1.0.0...HEAD
+[1.0.0]:
+  https://github.com/tylermilner/commit-messages-between-commits-action/releases/tag/v1.0.0
 
 <!-- Allow duplicate sub-header names between each release header -->
 <!-- https://github.com/markdownlint/markdownlint/issues/175 -->
