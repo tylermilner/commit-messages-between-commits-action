@@ -27,6 +27,6 @@ TBD
 {
   "no-duplicate-header": {
     "allow_different_nesting": true
-    }
+  }
 }
 -->
