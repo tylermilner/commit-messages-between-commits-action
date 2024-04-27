@@ -7,15 +7,6 @@ A GitHub Action to generate the list of commit messages between two commits. For
 instance, this can be used to generate very basic changelogs or release notes
 between builds.
 
-## Why?
-
-My aim with this is to replicate what I'm used to with one of my previous
-[Jenkins](https://www.jenkins.io) setups, where the entire list of commits since
-the last build was easily visible, and served as a very crude changelog that QA
-could use to help validate builds. If you're looking for something fancy to
-intelligently parse commit messages and generate release notes, then look
-elsewhere!
-
 ## Inputs
 
 ### `begin-sha`
@@ -77,6 +68,15 @@ Contents of commit messages file:
 - Here is the commit message for the previous commit (e.g. `HEAD~1`).
 - Here is the commit message for the beginning commit, which is the initial commit by default.
 ```
+
+## Why?
+
+My aim with this is to replicate what I'm used to with one of my previous
+[Jenkins](https://www.jenkins.io) setups, where the entire list of commits since
+the last build was easily visible, and served as a very crude changelog that QA
+could use to help validate builds. If you're looking for something fancy to
+intelligently parse commit messages and generate release notes, then look
+elsewhere!
 
 ## Contributing
 
