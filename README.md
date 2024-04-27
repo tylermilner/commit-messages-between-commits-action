@@ -60,10 +60,14 @@ steps:
       cat commit-messages.txt
 ```
 
-<!-- markdownlint-disable-next-line MD038 -->
+<!-- Ignore linter warning about space in in-line code block -->
+<!-- https://github.com/DavidAnson/markdownlint/blob/main/doc/md038.md -->
+<!-- markdownlint-disable MD038 -->
 
-For the output, each commit message is prefixed with a `-` and separated by a
+For the output, each commit message is prefixed with a `- ` and separated by a
 newline.
+
+<!-- markdownlint-enable MD038 -->
 
 An example output might look something like:
 
